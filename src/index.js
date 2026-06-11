@@ -21,7 +21,8 @@ const commands = new Map(
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once(Events.ClientReady, (c) => {
-  console.log(`Logged in as ${c.user.tag}`);
+  const commit = process.env.RAILWAY_GIT_COMMIT_SHA || 'dev (local)';
+  console.log(`Logged in as ${c.user.tag} — running commit ${commit}`);
   startCleanupJob();
   startServer(client);
 });
