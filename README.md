@@ -15,7 +15,7 @@ A [Connections](https://www.nytimes.com/games/connections)-style word game that 
 Gameplay rules:
 
 - Unlimited guesses; "One away!" hint when 3 of 4 words share a group.
-- Each completed run posts your NYT-style emoji grid (🟦🟩🟨🟪) and the updated leaderboard to the channel.
+- Each completed run posts your NYT-style emoji grid (🟦🟩🟨🟪) to the channel; view standings anytime with `/leaderboard`.
 - Leaderboard ranks by fewest guesses to finish (perfect = 4), ties broken by fastest time.
 - Each user can play a given puzzle once; reopening shows your result.
 - Puzzles and leaderboards expire 24 hours after creation.

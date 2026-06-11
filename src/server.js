@@ -8,7 +8,7 @@ const sessions = require('./services/sessions');
 const { judgeGuess } = require('./services/judge');
 const { buildEmojiGrid } = require('./services/scoring');
 const { GROUP_COUNT, WORDS_PER_GROUP } = require('./services/constants');
-const { renderPublicResult, renderLeaderboardEmbed } = require('./ui/playSessionView');
+const { renderPublicResult } = require('./ui/playSessionView');
 
 const DISCORD_API = 'https://discord.com/api';
 
@@ -122,15 +122,13 @@ function createServer(botClient) {
     res.json({ state: publicState(game, session) });
   });
 
+  // Posts only the finisher's emoji result grid; the leaderboard is available
+  // on demand via the /leaderboard command.
   async function postCompletion(game, entry, channelId) {
     if (!channelId || !botClient) return;
     try {
       const channel = await botClient.channels.fetch(channelId);
-      const entries = leaderboardStore.entriesForGame(game.id);
-      await channel.send({
-        content: renderPublicResult(game, entry),
-        embeds: [renderLeaderboardEmbed(game, entries)],
-      });
+      await channel.send(renderPublicResult(game, entry));
     } catch (err) {
       console.error('Failed to post completion message:', err);
     }
